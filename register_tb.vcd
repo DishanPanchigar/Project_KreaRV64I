@@ -1,0 +1,58 @@
+$date
+	Sun Jun 14 01:43:58 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module register_tb $end
+$var wire 64 ! data_out [63:0] $end
+$var reg 1 " clk $end
+$var reg 64 # data_in [63:0] $end
+$var reg 1 $ rst $end
+$var reg 1 % write_enable $end
+$scope module reg1 $end
+$var wire 1 " clk $end
+$var wire 64 & data_in [63:0] $end
+$var wire 1 $ rst $end
+$var wire 1 % write_enable $end
+$var reg 64 ' data_out [63:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 '
+b1001000110100010101100111100010010000101010111100110111101111 &
+0%
+1$
+b1001000110100010101100111100010010000101010111100110111101111 #
+0"
+b0 !
+$end
+#5
+1"
+#10
+0"
+0$
+#15
+1"
+#20
+0"
+1%
+#25
+b1001000110100010101100111100010010000101010111100110111101111 !
+b1001000110100010101100111100010010000101010111100110111101111 '
+1"
+#30
+0"
+0%
+#35
+1"
+#40
+0"
