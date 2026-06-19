@@ -15,7 +15,7 @@ cpu_core CPU (
     .rst(rst),
 
     .instr_addr(instr_addr),
-    .instr_in(instr),   // ✅ FIXED (was instr before)
+    .instr_in(instr),   
 
     .MemRead(MemRead),
     .MemWrite(MemWrite),

@@ -130,11 +130,6 @@ ALU_control ALUCTRL (
 
 wire [63:0] alu_result;
 wire zero;
-
-// LUI must pass the immediate straight through (rd = imm), it must NOT add
-// whatever garbage value happens to sit in the register addressed by
-// instr[19:15] (those bits are part of the LUI immediate, not a real rs1).
-// AUIPC must add the immediate to the instruction's own PC, not to rs1_data.
 wire is_lui   = (ID_EX_opcode == 7'b0110111);
 wire is_auipc = (ID_EX_opcode == 7'b0010111);
 
@@ -155,13 +150,6 @@ ALU64 ALU (
 // =====================
 // Branch & Jump
 // =====================
-// BUG FIX: the original code used `take_branch = ID_EX_Branch & zero` for
-// EVERY branch type. That only happens to be correct for BEQ. For BNE the
-// branch must fire when the ALU (SUB) result is NON-zero; for BLT/BLTU the
-// ALU (SLT/SLTU) result is 1 exactly when the branch must be taken (so the
-// condition is ~zero, not zero); for BGE/BGEU it's the opposite of
-// BLT/BLTU. This is exactly the bug that breaks BNE-based loops (e.g. the
-// classic Fibonacci `bne x4, x0, LOOP` loop never iterating).
 wire branch_condition =
     (ID_EX_funct3 == 3'b000) ?  zero :   // BEQ : rs1 == rs2  -> SUB result == 0
     (ID_EX_funct3 == 3'b001) ? ~zero :   // BNE : rs1 != rs2  -> SUB result != 0
@@ -264,7 +252,7 @@ always @(posedge clk) begin
 end
 
 // =====================
-// ID/EX PIPE (🔥 FIXED FLUSH)
+// ID/EX PIPE
 // =====================
 always @(posedge clk) begin
     if (flush) begin
