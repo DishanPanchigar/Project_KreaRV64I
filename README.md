@@ -171,8 +171,11 @@ Project_Processor/
 ├── Testbenches/
 │   └── test_environment_tb.v     your simulation entry point — clock/reset
 │                                  generation, program loading, result checks
-└── Simulation/
-    └── (compiled .vvp output goes here)
+├── Simulation/
+│   └── (compiled .vvp output goes here)
+│
+└── VCD_files/
+    └── (compiled .vcd waveform files)
 ```
 
 ---
