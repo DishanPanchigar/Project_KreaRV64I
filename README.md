@@ -27,9 +27,10 @@ programs.
 5. [Module Reference](#module-reference)
 6. [Building and Simulating](#building-and-simulating)
 7. [Loading a Program](#loading-a-program)
-8. [Known Limitations](#known-limitations)
-9. [Troubleshooting](#troubleshooting)
-10. [Design Notes / Changelog](#design-notes--changelog)
+8. [Physical Design (RTL → GDSII)](#physical-design-rtl--gdsii)
+9. [Known Limitations](#known-limitations)
+10. [Troubleshooting](#troubleshooting)
+11. [Design Notes / Changelog](#design-notes--changelog)
 
 ---
 
@@ -178,8 +179,25 @@ Project_Processor/
 ├── Simulation/
 │   └── (compiled .vvp output goes here)
 │
-└── VCD_files/
-    └── (compiled .vcd waveform files)
+├── VCD_files/
+│   └── (compiled .vcd waveform files)
+│
+├── Physical_Layout_Design/        git submodule → the OpenROAD/SKY130HD
+│                                   flow scripts, logs, reports, and raw
+│                                   results (.odb/.def/.spef/.sdc/...) from
+│                                   the RTL-to-GDSII run. See
+│                                   [Physical Design](#physical-design-rtl--gdsii).
+│
+└── GDSII/
+    ├── README.md                  detailed physical-design writeup: final
+    │                               layout, timing summary, and all heatmaps
+    ├── 6_finish.rpt                signoff timing/finish report
+    ├── Physical_Layout.png
+    ├── Power_Density_Heat_Map.png
+    ├── Placement_Density_HeatMap.png
+    ├── Pin_Density_HeatMap.png
+    ├── Routing_Congestion_HeatMap.png
+    └── Estimated_Congestion_RUDY_HeatMap.png
 ```
 
 ---
@@ -412,6 +430,44 @@ type into the 32-bit hex values you put on the right-hand side of those
 
 ---
 
+## Physical Design (RTL → GDSII)
+
+Beyond RTL simulation, this core has been carried through a full ASIC
+implementation flow (synthesis → floorplan → placement → CTS → routing →
+signoff) on the open-source **SKY130HD** PDK.
+
+The flow scripts, logs, and raw physical-design artifacts (`.odb`, `.def`,
+`.spef`, `.sdc`, route guides, etc.) live in **`Physical_Layout_Design/`**,
+which is a **git submodule** pointing at a separate repo
+([`Project_KreaRV64I_Physical_Design`](https://github.com/DishanPanchigar/Project_KreaRV64I_Physical_Design)).
+Clone with `--recurse-submodules` (or run `git submodule update --init`
+afterward) if you want that history/data locally.
+
+The **`GDSII/`** folder holds the human-readable results of that run — final
+layout image, timing signoff report, and five heatmaps (power, placement
+density, pin density, routing congestion, and estimated/RUDY congestion) —
+along with its own [`GDSII/README.md`](./GDSII/README.md) that walks through
+each one.
+
+**Headline numbers** (see `GDSII/README.md` and `GDSII/6_finish.rpt` for the
+full breakdown):
+
+| Metric | Value |
+|---|---|
+| PDK / standard-cell library | SKY130HD |
+| Routing completion | 100% |
+| Worst Negative Slack (WNS) | -0.10 ns |
+| Total Negative Slack (TNS) | -2.18 ns |
+| Max frequency (Fmax) | ~99 MHz |
+| Clock period used | 10 ns |
+
+The design is essentially at timing closure (a small setup violation
+remains) and is routed clean with only moderate, non-overflowing congestion
+in the central datapath — see the [Design Notes / Changelog](#design-notes--changelog)
+if that setup violation gets fixed in a later pass.
+
+---
+
 ## Known Limitations
 
 These are deliberate scope boundaries, not bugs — listed here so you know
@@ -474,6 +530,10 @@ the simulator has no reason to ever stop.
 
 ## Design Notes / Changelog
 
+- Carried the design through a complete RTL-to-GDSII physical implementation
+  on the SKY130HD PDK via a new `Physical_Layout_Design/` submodule, with
+  results, heatmaps, and a timing signoff summary published under
+  `GDSII/`. See [Physical Design](#physical-design-rtl--gdsii).
 - Branch condition logic in `cpu_core.v` was rewritten to correctly handle
   all six branch types (`beq`/`bne`/`blt`/`bge`/`bltu`/`bgeu`) based on
   `funct3`, rather than naively using the ALU's `Zero` flag directly for
