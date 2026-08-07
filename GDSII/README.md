@@ -90,7 +90,7 @@ RUDY (Rectangular Uniform Wire Density) estimation predicts congestion early.
 
 ---
 
-## 📌 Overall Physical Design Assessment
+## Overall Physical Design Assessment
 
 | Metric              | Value          | Status           |
 |---------------------|----------------|------------------|
@@ -103,7 +103,7 @@ RUDY (Rectangular Uniform Wire Density) estimation predicts congestion early.
 
 ---
 
-## 🧾 Key Takeaways
+## Key Takeaways
 
 - The processor is **successfully synthesized, placed, routed, and analyzed**.
 - Timing is **very close to closure**, requiring only minor optimizations (buffering, sizing, or retiming).
