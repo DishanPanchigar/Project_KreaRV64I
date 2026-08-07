@@ -15,6 +15,7 @@ instruction" tutorial), see **`ISA_Documentation.md`** in **`Docs`** folder.
 That document is the one you want open beside you while writing test
 programs.
 
+![Physical Layout](./GDSII/Physical_Layout.png)
 ---
 
 ## Table of Contents
