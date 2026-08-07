@@ -265,13 +265,13 @@ always @(posedge clk) begin
         ID_EX_rd <= 0;
         ID_EX_opcode <= 0;
 
-        ID_EX_ALUOp   <= 0;
-        ID_EX_ALUSrc  <= 0;
-        ID_EX_Branch  <= 0;
+        ID_EX_ALUOp <= 0;
+        ID_EX_ALUSrc <= 0;
+        ID_EX_Branch <= 0;
         ID_EX_MemRead <= 0;
-        ID_EX_MemWrite<= 0;
-        ID_EX_RegWrite<= 0;
-        ID_EX_Jump    <= 0;
+        ID_EX_MemWrite <= 0;
+        ID_EX_RegWrite <= 0;
+        ID_EX_Jump <= 0;
 
         ID_EX_funct3 <= 0;
         ID_EX_funct7 <= 0;

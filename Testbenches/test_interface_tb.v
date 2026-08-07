@@ -19,8 +19,7 @@ end
 
 // LOAD PROGRAM INTO INSTRUCTION MEMORY_________________________________________
 initial begin
-// paste instructions here {Format: DUT.IM.memory['i']= 'i_th instruction code'}
-
+// paste instructions here {Format: DUT.IM.memory['i']= 'i_th instruction code'}sss
 end
 //______________________________________________________________________________
 

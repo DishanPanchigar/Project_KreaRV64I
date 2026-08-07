@@ -4,7 +4,7 @@ What I want in my Processor?                                      Goal:
 - Clock speed atleast 1GHz                                    [          ]
 - Versatile / Compatible with Market                          [          ]
 - Support for 2008 IEEE-754 floating-point standards          [          ]
-- Complete design till GDSII Flow                             [          ]
+- Complete design till GDSII Flow                             [ ACHIEVED ]
  
 Milestones:                                                       Goal:
 - Correct branch instructions                                 [ ACHIEVED ]
