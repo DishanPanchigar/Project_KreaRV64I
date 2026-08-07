@@ -197,7 +197,10 @@ Project_Processor/
     ├── Placement_Density_HeatMap.png
     ├── Pin_Density_HeatMap.png
     ├── Routing_Congestion_HeatMap.png
-    └── Estimated_Congestion_RUDY_HeatMap.png
+    ├── Pin_Density_HeatMap.png
+    ├── Power_Net.png
+    ├── Ground_Net.png
+    └── Clock_Net.png
 ```
 
 ---
